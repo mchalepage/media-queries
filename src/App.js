@@ -1,29 +1,66 @@
 import React from 'react';
-import logo from './logo.svg';
+import './reset.css';
 import './App.css';
 
-function App() {
+class App extends React.Component {
+  constructor () {
+    super()
+
+    this.dropdown = React.createRef()
+  }
+
+  
+toggleMenu = () => {
+    console.log(this.dropdown.current)
+    let {current} = this.dropdown
+
+    if(current.classList.contains('show-animation')) {
+      current.classList.add('hide-animation')
+      current.classList.remove('show-animation')
+    } else {
+      current.classList.add('show-animation')
+      current.classList.remove('hide-animation')
+    }
+  }
+  
+  
+
+  render() { 
   return (
-    <div className="App">
-      <nav>
-        <div className="start-bootstrap">Start Bootstrap</div>
-        <div className="collapse navbar-collapse" id="navbarResponsive">
-          <ul className="navbar-list">
-            <li className="nav-item">Services</li>
-            <li className="nav-item">Portfolio</li>
-            <li className="nav-item">About</li>
-            <li className="nav-item">Team</li>
-            <li className="nav-item">Contact</li>
-          </ul>
+      <div className='body'>
+
+        <nav className='header'>
+          <div className='logo'>Start Bootstrap</div>
+          <div id='nav-bar'>
+            <button className='button'>SERVICES</button>
+            <button className='button'>PORTFOLIO</button>
+            <button className='button'>ABOUT</button>
+            <button className='button'>TEAM</button>
+            <button className='button'>CONTACT</button>
+          </div>
+
+          <div id='menu-hamburger-icon'>
+            <button onClick={this.toggleMenu} id='menu-button'>MENU<i  className='fas fa-bars' ></i></button>
+          </div>
+
+        </nav>
+
+        <div className='dropdown-menu' ref={this.dropdown}>
+            <button className='dropdown-button'>SERVICES</button>
+            <button className='dropdown-button'>PORTFOLIO</button>
+            <button className='dropdown-button'>ABOUT</button>
+            <button className='dropdown-button'>TEAM</button>
+            <button className='dropdown-button'>CONTACT</button>
         </div>
-      </nav>
-      <header className="masthead">
-        <div className="intro-lead-in">Welcome To Our Studio!</div>
-        <div className="intro-heading">It's Nice To Meet You</div>
-        <button className="tell-me-more">Tell Me More</button>
-      </header>
-    </div>
-  );
+
+        <div className='main-body'>
+          <h3 id='greeting'>Welcome To Our Studio!</h3>
+          <h1 id='introduction'>IT'S NICE TO <br id='line-break'/>MEET <br id='line-break-two'/>YOU</h1>
+          <button id='information-button'>TELL ME MORE</button>
+        </div>
+      </div>
+    );
+  }  
 }
 
 export default App;
